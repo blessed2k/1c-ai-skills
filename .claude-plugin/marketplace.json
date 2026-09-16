@@ -1,0 +1,17 @@
+{
+  "name": "1c-ai-skills",
+  "owner": {
+    "name": "blessed2k",
+    "url": "https://github.com/blessed2k"
+  },
+  "description": "Скиллы Claude Code для разработки на 1С: допрос по задаче, техническая спека, разбивка на шаги и выполнение по одному шагу.",
+  "plugins": [
+    {
+      "name": "1c-dev",
+      "source": "./plugins/1c-dev",
+      "description": "Цикл разработки на 1С с ИИ-агентом: grill, spec, tickets, step, плюс грабли Vanessa Automation и настройка под проект.",
+      "category": "development",
+      "keywords": ["1c", "1с", "bsl", "bsp", "vanessa", "spec", "skills"]
+    }
+  ]
+}

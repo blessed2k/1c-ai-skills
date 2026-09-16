@@ -1,0 +1,25 @@
+schema_version: "1.1"
+name: tickets-append
+description: tickets дописывает шаги с блоками и исполнителями в файл существующей спеки.
+runs: 1
+context:
+  scaffold_script: scaffold.sh
+execution:
+  prompt: |
+    /1c-dev:tickets docs/specs/pod-zakaz.md
+    Разбивку подтверждаю заранее: записывай шаги в спеку сразу, без вопросов.
+  max_turns: 20
+  allowed_tools: [Read, Glob, Grep, Write, Edit, Skill]
+graders:
+  - name: steps-section
+    type: regex
+    pattern: "## Шаги[\\s\\S]*- \\[ \\] 1\\.[\\s\\S]*- \\[ \\] 2\\."
+    target: {source: file, path: docs/specs/pod-zakaz.md}
+  - name: blocks-and-owners
+    type: regex
+    pattern: "блок:[^\\n]*(агент|человек)"
+    target: {source: file, path: docs/specs/pod-zakaz.md}
+  - name: spec-kept
+    type: regex
+    pattern: "## Решение"
+    target: {source: file, path: docs/specs/pod-zakaz.md}

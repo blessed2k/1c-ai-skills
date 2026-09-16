@@ -1,0 +1,13 @@
+{
+  "name": "1c-dev",
+  "version": "0.1.1",
+  "description": "Цикл разработки на 1С с ИИ-агентом: допрос по задаче, техническая спека, разбивка на проверяемые шаги, выполнение по одному шагу, грабли Vanessa Automation.",
+  "author": {
+    "name": "blessed2k",
+    "url": "https://github.com/blessed2k"
+  },
+  "homepage": "https://github.com/blessed2k/1c-ai-skills",
+  "repository": "https://github.com/blessed2k/1c-ai-skills",
+  "license": "MIT",
+  "keywords": ["1c", "1с", "bsl", "bsp", "vanessa", "spec", "skills"]
+}

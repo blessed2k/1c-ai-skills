@@ -1,0 +1,18 @@
+schema_version: "1.1"
+name: step-unverified
+description: step без команд проверки делает шаг и прямо пишет, что он не проверен.
+runs: 1
+context:
+  scaffold_script: scaffold.sh
+execution:
+  prompt: "/1c-dev:step"
+  max_turns: 20
+  allowed_tools: [Read, Glob, Grep, Write, Edit, Skill]
+graders:
+  - name: says-unverified
+    type: regex
+    pattern: "не проверен"
+    flags: i
+  - name: did-the-step
+    type: file_exists
+    path: "docs/note.txt"

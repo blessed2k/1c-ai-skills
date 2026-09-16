@@ -1,0 +1,22 @@
+schema_version: "1.1"
+name: step-skips-blocked
+description: step не берёт заблокированный шаг и шаг человека, а берёт первый свободный шаг агента.
+runs: 1
+context:
+  scaffold_script: scaffold.sh
+execution:
+  prompt: "/1c-dev:step"
+  max_turns: 20
+  allowed_tools: [Read, Glob, Grep, Write, Edit, Skill]
+graders:
+  - name: took-step-3
+    type: file_exists
+    path: "docs/step3.txt"
+  - name: skipped-step-2
+    type: file_exists
+    path: "docs/step2.txt"
+    exists: false
+  - name: step-2-still-open
+    type: regex
+    pattern: "- \\[ \\] 2\\."
+    target: {source: file, path: docs/specs/demo.md}

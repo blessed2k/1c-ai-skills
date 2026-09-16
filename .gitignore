@@ -1,0 +1,13 @@
+# Локальный контур приёмки, в публикацию не входит
+GATES.md
+.unlazy/
+.unlazy-hook-state.json
+.claude/settings.local.json
+
+# Результаты прогонов eval
+evals/results/
+plugins/*/evals/results/
+
+# Системное
+.DS_Store
+node_modules/

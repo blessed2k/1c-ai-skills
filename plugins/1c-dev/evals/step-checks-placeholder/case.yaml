@@ -1,0 +1,24 @@
+schema_version: "1.1"
+name: step-checks-placeholder
+description: step подставляет путь к выгрузке вместо {dump_path} и запускает команды проверки из настроек.
+runs: 1
+context:
+  scaffold_script: scaffold.sh
+execution:
+  prompt: "/1c-dev:step"
+  max_turns: 20
+  allowed_tools: [Read, Glob, Grep, Write, Edit, Bash, Skill]
+graders:
+  - name: did-the-step
+    type: file_exists
+    path: "docs/note.txt"
+  - name: ran-check-with-real-path
+    type: tool_used
+    tool: Bash
+    input_match: "src/cf/Configuration\\.xml"
+  - name: no-raw-placeholder
+    type: tool_used
+    tool: Bash
+    input_match: "\\{dump_path\\}"
+    min: 0
+    max: 0

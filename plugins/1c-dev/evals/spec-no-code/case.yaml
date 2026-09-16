@@ -1,0 +1,30 @@
+schema_version: "1.1"
+name: spec-no-code
+description: Если механизм уже есть, spec не останавливается молча, а сохраняет решение без кода с шагами для человека.
+runs: 1
+context:
+  scaffold_script: scaffold.sh
+execution:
+  prompt: |
+    /1c-dev:spec
+    Итог нашего обсуждения (обсуждение закончено, решения согласованы):
+    - нужно запретить продажу ниже минимальной цены;
+    - кода не будет: в конфигурации уже есть константа ВидМинимальноДопустимыхЦенПродажи и проверка
+      в модуле ЦенообразованиеСервер, её нужно только включить настройкой;
+    - обходить проверку может только роль ОтклонениеОтУсловийПродаж.
+    Тема для имени файла: min-ceny.
+    Документ подтверждаю заранее: сохраняй сразу, без вопросов.
+  max_turns: 20
+  allowed_tools: [Read, Glob, Grep, Write, Edit, Skill]
+graders:
+  - name: saved
+    type: file_exists
+    path: "docs/specs/min-ceny.md"
+  - name: no-code-kind
+    type: regex
+    pattern: "kind: no-code"
+    target: {source: file, path: docs/specs/min-ceny.md}
+  - name: human-step
+    type: regex
+    pattern: "- \\[ \\] 1\\.[^\\n]*человек"
+    target: {source: file, path: docs/specs/min-ceny.md}
