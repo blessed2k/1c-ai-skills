@@ -1,0 +1,20 @@
+schema_version: "1.1"
+name: k-registers
+runs: 2
+execution:
+  prompt: "Платформа 8.3.27, режим совместимости 8.3.27. В регистре сведений НастройкиКоманд измерения Пользователь и Команда. Удали записи текущего пользователя для всех команд из массива КомандыКУдалению (их может быть несколько тысяч). Только код."
+  max_turns: 8
+  allowed_tools: [Read, Grep, Glob, Skill]
+graders:
+  - name: replacement-mode-delete
+    type: regex
+    pattern: "РежимЗамещения\\.Удаление"
+  - name: no-set-per-item
+    type: regex
+    pattern: "Цикл\\s*\\n(?:(?!КонецЦикла)[\\s\\S])*СоздатьНаборЗаписей"
+    match: not_contains
+  - name: skill-fired
+    type: tool_used
+    tool: Skill
+    input_match: "bsl-standards"
+    arm: with-only

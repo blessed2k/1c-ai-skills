@@ -9,7 +9,7 @@
     {
       "name": "1c-dev",
       "source": "./plugins/1c-dev",
-      "description": "Цикл разработки на 1С с ИИ-агентом: grill, spec, tickets, step, плюс грабли Vanessa Automation и настройка под проект.",
+      "description": "Цикл разработки на 1С с ИИ-агентом (grill, spec, tickets, step), стандарты ИТС, на которых агент ошибается, структура модуля, заготовка YAxUnit, грабли Vanessa Automation и настройка под проект.",
       "category": "development",
       "keywords": ["1c", "1с", "bsl", "bsp", "vanessa", "spec", "skills"]
     }

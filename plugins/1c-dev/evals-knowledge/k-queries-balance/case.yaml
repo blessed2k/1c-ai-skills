@@ -1,0 +1,19 @@
+schema_version: "1.1"
+name: k-queries-balance
+runs: 2
+execution:
+  prompt: "Регистр накопления ТоварыНаСкладах: измерения Номенклатура и Склад, ресурс Количество, разделение итогов выключено. Напиши самый эффективный запрос: все элементы справочника Номенклатура с текущим остатком на складе &Склад (ноль, если остатка нет). Только текст запроса."
+  max_turns: 8
+  allowed_tools: [Read, Grep, Glob, Skill]
+graders:
+  - name: no-date
+    type: regex
+    pattern: "\\.Остатки\\(\\s*,"
+  - name: all-dimensions-in-join
+    type: regex
+    pattern: "ПО[\\s\\S]*\\sИ\\s+\\(?\\s*\\S*Склад\\s*=\\s*&Склад"
+  - name: skill-fired
+    type: tool_used
+    tool: Skill
+    input_match: "bsl-standards"
+    arm: with-only

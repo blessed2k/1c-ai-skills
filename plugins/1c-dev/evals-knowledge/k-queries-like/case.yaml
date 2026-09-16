@@ -1,0 +1,19 @@
+schema_version: "1.1"
+name: k-queries-like
+runs: 2
+execution:
+  prompt: "Конфигурация на БСП 3.1, СУБД PostgreSQL. Пользователь вводит в форме строку, нужно найти номенклатуру, в наименовании которой есть эта подстрока. Напиши текст запроса и установку параметров."
+  max_turns: 8
+  allowed_tools: [Read, Grep, Glob, Skill]
+graders:
+  - name: escape-keyword
+    type: regex
+    pattern: "СПЕЦСИМВОЛ"
+  - name: bsp-escape
+    type: regex
+    pattern: "СформироватьСтрокуДляПоискаВЗапросе"
+  - name: skill-fired
+    type: tool_used
+    tool: Skill
+    input_match: "bsl-standards"
+    arm: with-only

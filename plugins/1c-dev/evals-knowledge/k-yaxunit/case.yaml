@@ -1,0 +1,25 @@
+schema_version: "1.1"
+name: k-yaxunit
+runs: 2
+execution:
+  prompt: "Напиши заготовку тестового модуля YAxUnit для метода ПолучитьСкидку со сценариями БезСкидки и СоСкидкой. Только код."
+  max_turns: 8
+  allowed_tools: [Read, Grep, Glob, Skill]
+graders:
+  - name: registration
+    type: regex
+    pattern: "Процедура ИсполняемыеСценарии\\(\\) Экспорт"
+  - name: add-test
+    type: regex
+    pattern: "ЮТТесты[\\s\\S]*\\.ДобавитьТест\\(\"ПолучитьСкидку_БезСкидки\"\\)"
+  - name: assertion-api
+    type: regex
+    pattern: "ЮТест\\.ОжидаетЧто\\("
+  - name: tests-exported
+    type: regex
+    pattern: "Процедура ПолучитьСкидку_СоСкидкой\\(\\) Экспорт"
+  - name: skill-fired
+    type: tool_used
+    tool: Skill
+    input_match: "yaxunit-test-skeleton"
+    arm: with-only

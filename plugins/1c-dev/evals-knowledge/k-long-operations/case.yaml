@@ -1,0 +1,25 @@
+schema_version: "1.1"
+name: k-long-operations
+runs: 2
+execution:
+  prompt: "Конфигурация на БСП 3.1. Из формы обработки нужно запустить долгий расчёт (функция модуля менеджера обработки, возвращает таблицу) в фоне, дождаться результата на клиенте, обработать ошибку и загрузить результат в форму. Дай код модуля формы."
+  max_turns: 8
+  allowed_tools: [Read, Grep, Glob, Skill]
+graders:
+  - name: client-wait
+    type: regex
+    pattern: "ДлительныеОперацииКлиент\\.ОжидатьЗавершение"
+  - name: error-output
+    type: regex
+    pattern: "ВывестиИнформациюОбОшибке"
+  - name: storage-cleanup
+    type: regex
+    pattern: "УдалитьИзВременногоХранилища"
+  - name: handler-exported
+    type: regex
+    pattern: "Процедура \\S+\\(\\S+, \\S+\\) Экспорт"
+  - name: skill-fired
+    type: tool_used
+    tool: Skill
+    input_match: "bsl-standards"
+    arm: with-only

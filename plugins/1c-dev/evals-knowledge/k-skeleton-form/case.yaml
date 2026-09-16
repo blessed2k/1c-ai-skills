@@ -1,0 +1,19 @@
+schema_version: "1.1"
+name: k-skeleton-form
+runs: 2
+execution:
+  prompt: "Дай каркас модуля формы документа по стандарту структуры модуля 1С. На форме есть таблица Товары. Только области, без процедур."
+  max_turns: 8
+  allowed_tools: [Read, Grep, Glob, Skill]
+graders:
+  - name: table-region
+    type: regex
+    pattern: "#Область ОбработчикиСобытийЭлементовТаблицыФормыТовары"
+  - name: region-order
+    type: regex
+    pattern: "ОбработчикиСобытийФормы[\\s\\S]*ОбработчикиСобытийЭлементовШапкиФормы[\\s\\S]*ОбработчикиСобытийЭлементовТаблицыФормыТовары[\\s\\S]*ОбработчикиКомандФормы[\\s\\S]*СлужебныеПроцедурыИФункции"
+  - name: skill-fired
+    type: tool_used
+    tool: Skill
+    input_match: "bsl-module-skeleton"
+    arm: with-only

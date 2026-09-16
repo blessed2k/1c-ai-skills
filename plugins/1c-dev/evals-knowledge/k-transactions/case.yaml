@@ -1,0 +1,25 @@
+schema_version: "1.1"
+name: k-transactions
+runs: 2
+execution:
+  prompt: "Регистр сведений Счетчики: измерение Ключ, ресурс Значение. Напиши серверную функцию, которая увеличивает счётчик по ключу на 1 без гонок между сеансами и возвращает новое значение. Функцию могут вызвать как вне транзакции, так и из уже открытой транзакции. Только код."
+  max_turns: 8
+  allowed_tools: [Read, Grep, Glob, Skill]
+graders:
+  - name: begin-before-try
+    type: regex
+    pattern: "НачатьТранзакцию\\(\\);\\s*\\n\\s*Попытка"
+  - name: lock-before-read
+    type: regex
+    pattern: "Заблокировать\\(\\)[\\s\\S]*(Выполнить\\(\\)|Прочитать\\(\\))"
+  - name: rollback-first
+    type: regex
+    pattern: "Исключение\\s*\\n\\s*ОтменитьТранзакцию\\(\\)"
+  - name: rethrow
+    type: regex
+    pattern: "ВызватьИсключение;?\\s*\\n\\s*КонецПопытки"
+  - name: skill-fired
+    type: tool_used
+    tool: Skill
+    input_match: "bsl-standards"
+    arm: with-only

@@ -25,6 +25,7 @@ const r = spawnSync(
     '--runs', process.env.EVAL_RUNS || '1',
     '--threshold', '1.0',
     '--ablation', 'none',
+    '--judge-model', process.env.EVAL_JUDGE || 'sonnet',
     '--no-publish',
     '--trust-plugin',
     '--scaffold',
