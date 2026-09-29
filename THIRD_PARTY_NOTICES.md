@@ -1,6 +1,6 @@
 # Сторонние материалы
 
-Скиллы `grill`, `spec`, `tickets` и `step` переработаны из набора
+Скиллы `grill`, `spec`, `tickets`, `step` и `review` переработаны из набора
 [mattpocock/skills](https://github.com/mattpocock/skills) под разработку на 1С:
 
 | Скилл здесь | Исходный скилл |
@@ -9,6 +9,7 @@
 | `spec` | `skills/engineering/to-spec` |
 | `tickets` | `skills/engineering/to-tickets` |
 | `step` | `skills/engineering/implement` |
+| `review` | `skills/engineering/code-review` |
 
 Идеи и часть формулировок взяты оттуда, процесс и правила переписаны под платформу 1С
 (метаданные, движения, точки врезки, права, реструктуризация). Исходный набор распространяется

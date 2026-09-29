@@ -13,7 +13,8 @@ work in small verified steps:
 | `/1c-dev:grill` | Round-by-round interview on the task until you share an understanding; facts are gathered from the configuration dump |
 | `/1c-dev:spec` | Turns the discussion into a technical spec: metadata, register movements, extension point, rights, checks |
 | `/1c-dev:tickets` | Splits the spec into steps, each leaving the database working, with dependencies and an owner |
-| `/1c-dev:step` | Does exactly one unblocked step, verifies it, reports and stops |
+| `/1c-dev:step` | Does exactly one unblocked step, verifies it, sends it to review, reports and stops |
+| `/1c-dev:review` | Reviews a change in two parallel sub-agents: standards (ITS, project rules, code smells) and spec (was the requested work done, and nothing extra). `step` calls it itself |
 | `/1c-dev:bsl-standards` | 1C development standards (ITS v8std) where AI agents go wrong or that are recent: exceptions, transactions, batch register writes, files, long operations, client-server calls, queries, HTTPS and external code, write handlers |
 | `/1c-dev:bsl-module-skeleton` | Standard module structure: regions and their order per module kind |
 | `/1c-dev:yaxunit-test-skeleton` | YAxUnit test module template |
@@ -37,6 +38,6 @@ Other agents that read the open `SKILL.md` format can use the folders under
 
 ## Credits and license
 
-`grill`, `spec`, `tickets` and `step` are adapted from
+`grill`, `spec`, `tickets`, `step` and `review` are adapted from
 [mattpocock/skills](https://github.com/mattpocock/skills) (MIT), see
 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). This repository is licensed under [MIT](LICENSE).
