@@ -11,6 +11,7 @@ work in small verified steps:
 |---|---|
 | `/1c-dev:setup` | Interview that writes per-project settings: edit mode, spec folder, check commands |
 | `/1c-dev:grill` | Round-by-round interview on the task until you share an understanding; facts are gathered from the configuration dump |
+| `/1c-dev:plan` | Investigates an already stated task on its own and brings a plan for approval: what the configuration and the standard library (BSP) already provide, which ready-made methods to call, where the change plugs in |
 | `/1c-dev:spec` | Turns the discussion into a technical spec: metadata, register movements, extension point, rights, checks |
 | `/1c-dev:tickets` | Splits the spec into steps, each leaving the database working, with dependencies and an owner |
 | `/1c-dev:step` | Does exactly one unblocked step, verifies it, sends it to review, reports and stops |

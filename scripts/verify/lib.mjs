@@ -43,5 +43,5 @@ export function fail(errors, label) {
   }
 }
 
-export const SKILLS = ['grill', 'spec', 'tickets', 'step', 'review', 'vanessa-pitfalls', 'setup', 'bsl-standards', 'bsl-module-skeleton', 'yaxunit-test-skeleton'];
+export const SKILLS = ['grill', 'plan', 'spec', 'tickets', 'step', 'review', 'vanessa-pitfalls', 'setup', 'bsl-standards', 'bsl-module-skeleton', 'yaxunit-test-skeleton'];
 export const PLUGIN_DIR = 'plugins/1c-dev';
