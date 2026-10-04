@@ -16,7 +16,7 @@ work in small verified steps:
 | `/1c-dev:tickets` | Splits the spec into steps, each leaving the database working, with dependencies and an owner |
 | `/1c-dev:step` | Does exactly one unblocked step, verifies it, sends it to review, reports and stops |
 | `/1c-dev:review` | Reviews a change in two parallel sub-agents: standards (ITS, project rules, code smells) and spec (was the requested work done, and nothing extra). `step` calls it itself |
-| `/1c-dev:bsl-standards` | 1C development standards (ITS v8std) where AI agents go wrong or that are recent: exceptions, transactions, batch register writes, files, long operations, client-server calls, queries, HTTPS and external code, write handlers |
+| `/1c-dev:bsl-standards` | 1C development standards (ITS v8std) where AI agents go wrong or that are recent: exceptions, transactions, batch register writes, files, long operations, client-server calls, queries, PostgreSQL and MS SQL differences, HTTPS and external code, write handlers |
 | `/1c-dev:bsl-module-skeleton` | Standard module structure: regions and their order per module kind |
 | `/1c-dev:yaxunit-test-skeleton` | YAxUnit test module template |
 | `/1c-dev:vanessa-pitfalls` | Known traps of Vanessa Automation UI tests |
