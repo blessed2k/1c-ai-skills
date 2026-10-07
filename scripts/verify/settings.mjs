@@ -4,13 +4,14 @@ import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { ROOT, read, fail, PLUGIN_DIR } from './lib.mjs';
 
-export const KEYS = ['edit_mode', 'author_marker', 'specs_dir', 'checks', 'dump_path', 'mcp', 'executors'];
+export const KEYS = ['edit_mode', 'author_marker', 'specs_dir', 'storage', 'checks', 'dump_path', 'mcp', 'executors'];
 const EDIT_MODES = ['listing', 'files'];
+const STORAGES = ['files', 'threadline'];
 const USES = {
   grill: ['dump_path', 'mcp'],
-  spec: ['specs_dir', 'dump_path', 'mcp'],
-  tickets: ['specs_dir', 'executors'],
-  step: ['edit_mode', 'author_marker', 'checks', 'executors', 'specs_dir', 'dump_path', '{dump_path}'],
+  spec: ['specs_dir', 'storage', 'dump_path', 'mcp'],
+  tickets: ['specs_dir', 'storage', 'executors'],
+  step: ['edit_mode', 'author_marker', 'checks', 'executors', 'specs_dir', 'storage', 'dump_path', '{dump_path}'],
   setup: KEYS,
 };
 
@@ -44,6 +45,7 @@ export function parseSettings(text) {
     }
   }
   if ('edit_mode' in data && !EDIT_MODES.includes(data.edit_mode)) errors.push(`edit_mode ${data.edit_mode} not in ${EDIT_MODES}`);
+  if ('storage' in data && !STORAGES.includes(data.storage)) errors.push(`storage ${data.storage} not in ${STORAGES}`);
   if ('checks' in data && !Array.isArray(data.checks)) errors.push('checks must be a list');
   return { data, errors };
 }
@@ -53,7 +55,7 @@ const files = process.argv.slice(2);
 
 if (files.length) {
   // Контроль: заведомо плохой файл обязан не пройти.
-  if (parseSettings('---\nedit_mode: magic\nfoo: 1\n---\n').errors.length < 2) errors.push('control: bad settings accepted');
+  if (parseSettings('---\nedit_mode: magic\nstorage: cloud\nfoo: 1\n---\n').errors.length < 3) errors.push('control: bad settings accepted');
   for (const f of files) {
     if (!existsSync(f)) {
       errors.push(`${f}: not found`);
@@ -75,6 +77,7 @@ const human = existsSync(join(ROOT, 'docs/settings.md')) ? read('docs/settings.m
 if (!human.includes('plugins/1c-dev/skills/setup/settings-format.md')) errors.push('docs/settings.md does not link the format file');
 for (const k of KEYS) if (!doc.includes(`\`${k}\``)) errors.push(`format does not document ${k}`);
 for (const v of EDIT_MODES) if (!doc.includes(`\`${v}\``)) errors.push(`format does not document edit_mode ${v}`);
+for (const v of STORAGES) if (!doc.includes(`\`${v}\``)) errors.push(`format does not document storage ${v}`);
 for (const p of ['.claude/1c-dev.md', '~/.claude/1c-dev.md', '{dump_path}', '{project_root}', 'Корень проекта']) {
   if (!doc.includes(p)) errors.push(`format lacks ${p}`);
 }

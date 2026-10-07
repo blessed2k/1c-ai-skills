@@ -20,6 +20,7 @@ work in small verified steps:
 | `/1c-dev:bsl-module-skeleton` | Standard module structure: regions and their order per module kind |
 | `/1c-dev:yaxunit-test-skeleton` | YAxUnit test module template |
 | `/1c-dev:vanessa-pitfalls` | Known traps of Vanessa Automation UI tests |
+| `/1c-dev:threadline` | Reference for `storage: threadline`: specs and steps live in the Threadline app instead of files |
 
 The agent never loads a configuration into a database, updates the database structure, writes
 data or touches the configuration repository: it prepares the change and tells you what to run.
